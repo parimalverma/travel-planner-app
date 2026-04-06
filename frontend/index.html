@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Travel Planner</title>
+
+  <style>
+    body { font-family: Arial; max-width:600px; margin:40px;}
+    label { display:block; margin-top:10px;}
+    input,select,textarea { width:100%; padding:6px;}
+    .traveller-box { border:1px solid #ccc; padding:10px; margin-top:10px;}
+  </style>
+
+  <link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+
+<h2>Travel Planner</h2>
+
+<label>Source City *</label>
+<input id="sourceCity">
+
+<label>Destination City *</label>
+<input id="destinationCity">
+
+<label>Start Date *</label>
+<input type="date" id="startDate">
+
+<label>End Date *</label>
+<input type="date" id="endDate">
+
+<label>Number of Persons *</label>
+<select id="personCount">
+  <option value="">Select</option>
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+</select>
+
+<div id="travellersContainer"></div>
+
+<label>Preferred Transport</label>
+<label><input type="checkbox" class="transport" value="train"> Train</label>
+<label><input type="checkbox" class="transport" value="bus"> Bus</label>
+<label><input type="checkbox" class="transport" value="flight"> Flight</label>
+
+<label>Interests</label>
+<label><input type="checkbox" class="interest" value="beaches"> Beaches</label>
+<label><input type="checkbox" class="interest" value="mountains"> Mountains</label>
+<label><input type="checkbox" class="interest" value="food"> Food</label>
+
+<label>Additional Comment</label>
+<textarea id="comments"></textarea>
+
+<br><br>
+<button onclick="submitForm()">Submit Travel Plan</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
