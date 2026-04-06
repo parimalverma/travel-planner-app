@@ -3,16 +3,20 @@ workflows:
     name: Android Build
 
     environment:
-      node: 18   # ✅ Stable version (avoid Node 25 issues)
+      node: 18   # ✅ Stable Node version
 
     scripts:
       - name: Install Bubblewrap
         script: |
           npm install -g @bubblewrap/cli
 
-      - name: Initialize TWA (non-interactive)
+      - name: Debug Check
         script: |
-          bubblewrap init \
+          echo "✅ Using UPDATED codemagic.yaml"
+
+      - name: Initialize TWA (force non-interactive)
+        script: |
+          yes | bubblewrap init \
             --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
             --directory twa-build \
             --packageId com.travelplanner.app \
@@ -22,12 +26,12 @@ workflows:
             --display standalone \
             --themeColor "#0d6efd" \
             --backgroundColor "#ffffff" \
-            --startUrl "/travel-planner-frontend/index.html" \
+            --startUrl "/index.html" \
             --iconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
             --maskableIconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
             --skipPwaValidation \
             --skipSigning \
-            --useExistingJdk   # ✅ THIS FIXES YOUR ERROR
+            --useExistingJdk
 
       - name: Build APK
         script: |
