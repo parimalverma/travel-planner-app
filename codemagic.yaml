@@ -1,14 +1,16 @@
 workflows:
   android-build:
     name: Android Build
+
     environment:
-      node: latest
+      node: 18   # ✅ Stable version (avoid Node 25 issues)
+
     scripts:
       - name: Install Bubblewrap
         script: |
           npm install -g @bubblewrap/cli
 
-      - name: Initialize TWA (fully non-interactive)
+      - name: Initialize TWA (non-interactive)
         script: |
           bubblewrap init \
             --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
@@ -24,7 +26,8 @@ workflows:
             --iconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
             --maskableIconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
             --skipPwaValidation \
-            --skipSigning
+            --skipSigning \
+            --useExistingJdk   # ✅ THIS FIXES YOUR ERROR
 
       - name: Build APK
         script: |
