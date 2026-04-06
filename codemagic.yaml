@@ -7,15 +7,19 @@ workflows:
       - name: Install Bubblewrap
         script: |
           npm install -g @bubblewrap/cli
-      - name: Initialize TWA
+
+      - name: Initialize TWA (non-interactive)
         script: |
           bubblewrap init \
             --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
             --skipPwaValidation \
-            --directory twa-build
+            --directory twa-build \
+            --yes
+
       - name: Build APK
         script: |
           cd twa-build
-          bubblewrap build
+          bubblewrap build --skipSigning
+
     artifacts:
-      - twa-build/app-release-signed.apk
+      - twa-build/app-release-unsigned.apk
