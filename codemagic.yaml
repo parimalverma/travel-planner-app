@@ -8,13 +8,23 @@ workflows:
         script: |
           npm install -g @bubblewrap/cli
 
-      - name: Initialize TWA (non-interactive)
+      - name: Initialize TWA (fully non-interactive)
         script: |
           bubblewrap init \
             --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
-            --skipPwaValidation \
             --directory twa-build \
-            --yes
+            --packageId com.travelplanner.app \
+            --host storage.googleapis.com \
+            --name "Travel Planner" \
+            --launcherName "TravelApp" \
+            --display standalone \
+            --themeColor "#0d6efd" \
+            --backgroundColor "#ffffff" \
+            --startUrl "/travel-planner-frontend/index.html" \
+            --iconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
+            --maskableIconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
+            --skipPwaValidation \
+            --skipSigning
 
       - name: Build APK
         script: |
