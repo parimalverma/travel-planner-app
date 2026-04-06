@@ -1,0 +1,21 @@
+workflows:
+  android-build:
+    name: Android Build
+    environment:
+      node: latest
+    scripts:
+      - name: Install Bubblewrap
+        script: |
+          npm install -g @bubblewrap/cli
+      - name: Initialize TWA
+        script: |
+          bubblewrap init \
+            --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
+            --skipPwaValidation \
+            --directory twa-build
+      - name: Build APK
+        script: |
+          cd twa-build
+          bubblewrap build
+    artifacts:
+      - twa-build/app-release-signed.apk
