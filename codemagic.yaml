@@ -3,20 +3,16 @@ workflows:
     name: Android Build
 
     environment:
-      node: 18   # ✅ Stable Node version
+      node: 18
 
     scripts:
       - name: Install Bubblewrap
         script: |
           npm install -g @bubblewrap/cli
 
-      - name: Debug Check
+      - name: Initialize TWA (strict non-interactive)
         script: |
-          echo "✅ Using UPDATED codemagic.yaml"
-
-      - name: Initialize TWA (force non-interactive)
-        script: |
-          yes | bubblewrap init \
+          bubblewrap init \
             --manifest https://storage.googleapis.com/travel-planner-frontend/manifest.json \
             --directory twa-build \
             --packageId com.travelplanner.app \
@@ -31,7 +27,8 @@ workflows:
             --maskableIconUrl "https://storage.googleapis.com/travel-planner-frontend/icon-512.png" \
             --skipPwaValidation \
             --skipSigning \
-            --useExistingJdk
+            --useExistingJdk \
+            --no-interactive
 
       - name: Build APK
         script: |
